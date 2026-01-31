@@ -5,6 +5,7 @@
 # docker runtime / state
 **/work/
 **/library/
+**/conf
 **/postgres/
 **/data/
 **/db/

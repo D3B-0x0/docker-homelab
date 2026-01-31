@@ -1,0 +1,40 @@
+name: AdGuardHome
+services:
+  adguardhome:
+    container_name: adguardhome
+    restart: unless-stopped
+    image: adguard/adguardhome:latest
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      # - 67:67/udp  # DHCP - only if you need it
+      # - 68:68/udp  # DHCP - only if you need it
+      - 80:80/tcp
+      - 443:443/tcp
+      - 443:443/udp
+      - 3000:3000/tcp
+      - 853:853/tcp
+      - 853:853/udp
+      - 5443:5443/tcp
+      - 5443:5443/udp
+      - 6060:6060/tcp
+
+  tailscale:
+    container_name: adguardhome-tailscale
+    image: tailscale/tailscale:latest
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_EXTRA_ARGS=--hostname=adguardhome-ts
+    volumes:
+      - ./tailscale/state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: "service:adguardhome"
