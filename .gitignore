@@ -1,0 +1,18 @@
+# secrets
+.env
+**/.env
+
+# docker runtime / state
+**/work/
+**/library/
+**/postgres/
+**/data/
+**/db/
+**/uploads/
+
+# tailscale
+**/tailscale/
+
+# misc
+*.log
+
