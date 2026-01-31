@@ -7,10 +7,6 @@ Clean, reproducible Docker Compose setup for self-hosting core services.
 
 ### AdGuard Home
 
-* Network-wide DNS blocking
-* Runs close to the network for low latency
-* Tailscale support for remote access
-
 Path:
 
 ```
@@ -19,29 +15,18 @@ adguard-home/
 
 ### Immich
 
-* Self-hosted photo & video backup
-* Hardware acceleration configs included (ML + transcoding)
-* Designed to run behind Docker with GPU passthrough
-
 Path:
 
 ```
 immich-app/
 ```
 
-## Requirements
-
-* Linux host
-* Docker
-* Docker Compose v2
-* (Optional) GPU + proper drivers for Immich HW accel
-
 ## Usage
 
 Clone the repo:
 
 ```
-git clone <repo-url>
+git clone git@github.com:D3B-0x0/docker-homelab.git
 cd docker
 ```
 
