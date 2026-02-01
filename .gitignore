@@ -12,6 +12,9 @@
 **/data/
 **/db/
 **/uploads/
+**/code-server-local/
+**/code-server-config/
+
 
 # tailscale
 **/tailscale/
