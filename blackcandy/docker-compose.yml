@@ -1,0 +1,32 @@
+name: blackcandy
+services:
+  app:
+    image: ghcr.io/blackcandy-org/blackcandy:latest
+    container_name: blackcandy
+    restart: unless-stopped
+    user: "0:0"  # Running as root to avoid permission issues
+    ports:
+      - 4000:80
+    environment:
+      - MEDIA_PATH=/music
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./storage:/app/storage
+      - ./music:/music
+
+  tailscale:
+    container_name: blackcandy-tailscale
+    image: tailscale/tailscale:latest
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_EXTRA_ARGS=--hostname=blackcandy
+    volumes:
+      - ./tailscale/state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: "service:app"
