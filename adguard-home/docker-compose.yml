@@ -7,20 +7,10 @@ services:
     volumes:
       - ./work:/opt/adguardhome/work
       - ./conf:/opt/adguardhome/conf
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
-      # - 67:67/udp  # DHCP - only if you need it
-      # - 68:68/udp  # DHCP - only if you need it
-      - 3080:80/tcp
-      - 3443:443/tcp
-      - 3443:443/udp
-      - 3000:3000/tcp
-      - 853:853/tcp
-      - 853:853/udp
-      - 5443:5443/tcp
-      - 5443:5443/udp
-      - 6060:6060/tcp
+    networks:
+      adguard_macvlan:
+        ipv4_address: 192.168.0.200  # Pick a static IP from your ip-range
+    # Removing the ports section - macvlan gives direct network access
 
   tailscale:
     container_name: adguardhome-tailscale
@@ -38,3 +28,7 @@ services:
       - NET_ADMIN
       - SYS_MODULE
     network_mode: "service:adguardhome"
+
+networks:
+  adguard_macvlan:
+    external: true
