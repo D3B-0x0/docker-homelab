@@ -11,6 +11,9 @@
 **/postgres/
 **/data/
 **/db/
+**/dockhand-data/
+**/dockhand/config
+**/ts/
 **/uploads/
 
 # tailscale
