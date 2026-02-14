@@ -17,10 +17,12 @@
 **/uploads/
 **/adguardhome/adguard-data/
 **/adguardhome/config/
+**/it-tools/config/
+**/navidrome/config/
+**/navidrome/navidrome-data/
 
 # tailscale
 **/tailscale/
 
 # misc
 *.log
-
